@@ -1,0 +1,50 @@
+/* Kontainer khusus Welcome Page */
+.welcome-container {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #ffefba, #ffffff);
+}
+
+/* Title */
+.welcome-title {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* Grid untuk menu */
+.menu-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 kolom */
+    gap: 20px; /* Jarak antar item */
+    justify-content: center; /* Pusatkan grid */
+    max-width: 600px; /* Batasi lebar total grid */
+    margin: 0 auto; /* Supaya grid tetap di tengah */
+}
+
+/* Gaya item menu */
+.menu-item {
+    background-color: #d9d9d9;
+    color: #333;
+    padding: 20px;
+    width: 350px; /* Ukuran tetap */
+    height: 200px; /* Ukuran tetap */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+}
+
+.menu-item:hover {
+    transform: scale(1.05);
+}
+
+.menu-item:active {
+    transform: scale(0.95);
+}

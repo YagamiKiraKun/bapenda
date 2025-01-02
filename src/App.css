@@ -1,0 +1,20 @@
+/* src/App.css */
+.App {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  h1 {
+    color: #333;
+  }
+  
+  .App .login-container {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  

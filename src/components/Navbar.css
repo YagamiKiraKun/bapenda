@@ -1,0 +1,74 @@
+/* Navbar styles */
+.navbar {
+  position: fixed; /* Menjadikan navbar tetap di atas */
+  top: 0; /* Menghilangkan jarak atas */
+  left: 0; /* Menghilangkan jarak kiri */
+  width: 100%; /* Menyebar ke seluruh lebar halaman */
+  padding: 20px 20px;
+  background-color: #045496;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* Pastikan navbar berada di atas konten lainnya */
+  box-sizing: border-box; /* Memastikan padding tidak menambah lebar navbar */
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  width: 60px; 
+  height: auto;
+}
+
+.navbar-brand {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-dropdown {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-dropdown button {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  text-align: left;
+  cursor: pointer;
+  color: #fff;
+  margin-left: 10px;
+  transition: color 0.3s ease; 
+}
+
+.navbar-dropdown button:hover {
+  color: #ffeb3b; 
+}
+
+.navbar-dropdown button .icon {
+  margin-right: 10px;
+}
+
+@media (min-width: 768px) {
+  .navbar-dropdown {
+    display: flex !important;
+    flex-direction: row !important;
+  }
+
+  .navbar-dropdown button {
+    margin: 0 10px;
+    background-color: transparent;
+  }
+}
