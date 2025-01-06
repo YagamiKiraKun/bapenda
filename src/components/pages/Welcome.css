@@ -3,7 +3,21 @@
     font-family: 'Arial', sans-serif;
     text-align: center;
     padding: 40px 20px;
-    background: linear-gradient(135deg, #ffefba, #ffffff);
+}
+
+.welcome-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/backgroundBapenda.jpg'); /* Sesuaikan jalur gambar */
+    background-size: cover; /* Pastikan gambar mengisi seluruh area */
+    background-position: center; /* Fokuskan gambar di tengah */
+    background-repeat: no-repeat; /* Hindari pengulangan gambar */
+    filter: blur(5px); /* Tambahkan efek blur */
+    z-index: -1; /* Letakkan di belakang konten */
 }
 
 /* Title */

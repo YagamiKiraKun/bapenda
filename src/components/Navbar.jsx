@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaHome, FaSignOutAlt } from 'react-icons/fa';
 import './Navbar.css'; // Import the CSS file
-import logo from './logodispenda.png'; // Import logo image
+import logo from './assets/logodispenda.png'; // Import logo image
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -22,9 +22,9 @@ const Navbar = () => {
       {/* Navigation Buttons */}
       <div className="navbar-dropdown">
         <button
-          onClick={() => navigate('/welcome')}
+          onClick={() => navigate('/login')}
         >
-          <FaHome className="icon" /> Home
+          <FaHome className="icon" /> Login
         </button>
         <button
           onClick={() => navigate('/')}

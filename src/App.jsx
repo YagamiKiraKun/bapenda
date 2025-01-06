@@ -1,14 +1,22 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Login from './components/Login';
-import Welcome from './components/Welcome';
+import Home from './components/pages/Home';
+import Login from './components/pages/Login';
+import Welcome from './components/pages/Welcome';
+import ABT from './components/data/ABT';
+import AirBawahTanah from './components/form/air-bawah-tanah';
+import Penilaian from './components/pages/Penilaian';
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/form/air-bawah-tanah" element={<AirBawahTanah />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/welcome" element={<Welcome />} />
+        <Route path="/data/ABT" element={<ABT />} />
+        <Route path="/penilaian" element={<Penilaian />} />
       </Routes>
     </Router>
   );
