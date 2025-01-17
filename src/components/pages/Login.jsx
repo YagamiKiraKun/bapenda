@@ -11,7 +11,7 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     // Cek username dan password
-    if (username === 'WP' && password === 'WP') {
+    if (username === 'wp' && password === 'wp') {
       navigate('/welcome');  // Arahkan ke halaman Welcome
     } else {
       alert('Username atau Password salah');

@@ -15,7 +15,7 @@ const Home = () => {
       <Navbar />
       <h1 className="home-title">Selamat Datang di Sistem E-PDL Dispenda Sumatera Selatan</h1>
       <div className="home-message">
-        <p>Selamat datang, Anda login sebagai Admin</p>
+        <p>Selamat datang, Anda login sebagai Wajib Pajak</p>
       </div>
 
       <div className="menu-container">

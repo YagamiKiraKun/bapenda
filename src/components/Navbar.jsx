@@ -18,11 +18,10 @@ const Navbar = () => {
   // Fungsi untuk tombol Logout
   const handleLogout = () => {
     if (isUserDashboard) {
-      // Jika di dashboard user dengan login
-      alert('Anda masuk sebagai admin');
+      // Jika di dashboard ADMIN
       navigate('/'); // Kembali ke dashboard utama
     } else {
-      // Jika di mode tanpa login
+      // Jika di mode WP
       navigate('/login'); // Kembali ke halaman login
     }
   };

@@ -16,7 +16,7 @@ const Welcome = () => {
       <h1 className="welcome-title">Selamat Datang, WP ! di Sistem E-PDL Dispenda Sumatera Selatan</h1>
       {/* Menampilkan pesan selamat datang */}
       <div className="welcome-message">
-        <p>Selamat datang, Anda login sebagai Wajib Pajak</p>
+        <p>Selamat datang, Anda login sebagai Admin yang Rupawan</p>
       </div>
       <div className="menu-container">
         <button className="menu-item" onClick={() => handleClick('ABT')}>Air Bawah Tanah</button>
