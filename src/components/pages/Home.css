@@ -62,3 +62,38 @@
 .menu-item:active {
     transform: scale(0.95);
 }
+
+/* Gaya untuk pesan selamat datang */
+.home-message {
+    font-size: 1.2rem; /* Ukuran font yang lebih kecil */
+    font-weight: bold; /* Membuat teks tetap bold */
+    color: #333; /* Warna teks gelap untuk kontras */
+    text-align: center;
+    margin: 20px auto;
+    max-width: 600px;
+    position: relative;
+    padding: 8px;
+    letter-spacing: 0.8px; /* Sedikit jarak antar huruf untuk kesan elegan */
+    text-transform: capitalize; /* Membuat setiap kata dimulai dengan huruf besar */
+    z-index: 1;
+}
+
+/* Efek glossy */
+.home-message::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.4); /* Efek glossy halus */
+    border-radius: 10px;
+    z-index: -1;
+    backdrop-filter: blur(5px); /* Efek blur untuk memberikan kesan glossy */
+}
+
+/* Efek transisi halus pada hover */
+.home-message:hover {
+    color: #0066cc; /* Ganti warna teks saat hover untuk efek interaktif */
+    transition: color 0.3s ease-in-out;
+}

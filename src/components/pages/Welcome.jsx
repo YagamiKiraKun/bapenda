@@ -13,9 +13,13 @@ const Welcome = () => {
   return (
     <div className="welcome-container">
       <Navbar />
-      <h1 className="welcome-title">Selamat Datang di Sistem E-PDL Dispenda Sumatera Selatan</h1>
+      <h1 className="welcome-title">Selamat Datang, WP ! di Sistem E-PDL Dispenda Sumatera Selatan</h1>
+      {/* Menampilkan pesan selamat datang */}
+      <div className="welcome-message">
+        <p>Selamat datang, Anda login sebagai Wajib Pajak</p>
+      </div>
       <div className="menu-container">
-      <button className="menu-item" onClick={() => handleClick('ABT')}>Air Bawah Tanah</button>
+        <button className="menu-item" onClick={() => handleClick('ABT')}>Air Bawah Tanah</button>
         <button className="menu-item" onClick={() => handleClick('minerba')}>Minerba</button>
         <button className="menu-item" onClick={() => handleClick('ppj')}>PPJ</button>
         <button className="menu-item" onClick={() => handleClick('restoran')}>Restoran</button>

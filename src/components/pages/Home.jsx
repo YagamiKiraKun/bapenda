@@ -14,6 +14,10 @@ const Home = () => {
     <div className="home-container">
       <Navbar />
       <h1 className="home-title">Selamat Datang di Sistem E-PDL Dispenda Sumatera Selatan</h1>
+      <div className="home-message">
+        <p>Selamat datang, Anda login sebagai Admin</p>
+      </div>
+
       <div className="menu-container">
       <button className="menu-item" onClick={() => handleClick('air-bawah-tanah')}>Air Bawah Tanah</button>
         <button className="menu-item" onClick={() => handleClick('minerba')}>Minerba</button>

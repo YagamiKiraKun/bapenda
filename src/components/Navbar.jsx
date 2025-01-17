@@ -41,7 +41,7 @@ const Navbar = () => {
       <div className="navbar-dropdown">
         {/* Tombol Home hanya muncul di halaman form dan halaman data, tidak di halaman welcome */}
         {(isFormPage || isDataPage) && (
-          <button onClick={() => navigate(isFormPage || isDataPage ? '/' : '/welcome')}>
+          <button onClick={() => navigate(isFormPage ? '/' : '/welcome')}>
             <FaHome className="icon" /> Home
           </button>
         )}
