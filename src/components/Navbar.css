@@ -26,13 +26,12 @@
 }
 
 .navbar-brand {
+  position: absolute; /* Posisi absolut agar benar-benar di tengah */
+  left: 50%; /* Pusatkan secara horizontal */
+  transform: translateX(-50%); /* Sesuaikan dengan lebar elemen */
   font-size: 30px;
   font-weight: bold;
   text-align: center;
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .navbar-dropdown {
