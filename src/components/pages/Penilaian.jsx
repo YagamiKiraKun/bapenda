@@ -51,7 +51,7 @@ const Penilaian = () => {
     <div>
     <Navbar />
     <div className="form-container">
-      <h2>SPTPD Air Bawah Tanah</h2>
+      <h2>SPTPD Self Assesment</h2>
       <form onSubmit={handleSubmit}>
         {/* Jumlah Pembayaran dan Pajak Terhutang Sebelumnya */}
         <h3>1. Jumlah Pembayaran dan Pajak Terhutang Sebelumnya</h3>
