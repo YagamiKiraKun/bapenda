@@ -7,6 +7,7 @@ import ABT from './components/data/ABT';
 import AirBawahTanah from './components/form/air-bawah-tanah';
 import Minerba from './components/form/minerba';
 import PPJ from './components/form/ppj';
+import Restoran from './components/form/restoran';
 import Penilaian from './components/pages/Penilaian';
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/form/air-bawah-tanah" element={<AirBawahTanah />} />
         <Route path="/form/minerba" element={<Minerba />} />
         <Route path="/form/ppj" element={<PPJ />} />
+        <Route path="/form/restoran" element={<Restoran />} />
         <Route path="/login" element={<Login />} />
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/data/ABT" element={<ABT />} />
