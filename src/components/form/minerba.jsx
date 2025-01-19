@@ -9,66 +9,20 @@ const Minerba = () => {
     npwpd: '',
     nama: '',
     alamat: '',
-    namaBahanMineral: '', // Menambahkan properti untuk Nama Bahan Mineral
+    namaBahanMineral: '',
     jumlah: '',
-    lokasiPenambangan: [],
+    hargaPasar: '',
+    sumberPengambilan: '',
     tanggal: '',
   });
 
-  const bahanMineralOptions = [
-    { code: "01", name: "Asbes" },
-    { code: "02", name: "Batu tulis" },
-    { code: "03", name: "Batu setengah permata" },
-    { code: "04", name: "Batu Kapur" },
-    { code: "05", name: "Batu apung" },
-    { code: "06", name: "Batu Permata" },
-    { code: "07", name: "Bentonit" },
-    { code: "08", name: "Dolomit" },
-    { code: "09", name: "Feldspar" },
-    { code: "10", name: "Garam batu (halite)" },
-    { code: "11", name: "Grafit" },
-    { code: "12", name: "Granit" },
-    { code: "13", name: "Gips" },
-    { code: "14", name: "Kalsit" },
-    { code: "15", name: "Kaolin" },
-    { code: "16", name: "Leusit" },
-    { code: "17", name: "Magnesit" },
-    { code: "18", name: "Mika" },
-    { code: "19", name: "Marmer" },
-    { code: "20", name: "Nitrat" },
-    { code: "21", name: "Pasir dan Kerikil" },
-    { code: "22", name: "Pasir Kuarsa" },
-    { code: "23", name: "Perlit" },
-    { code: "24", name: "Phospat" },
-    { code: "25", name: "Talk" },
-    { code: "26", name: "Tanah Serap (fullers earth)" },
-    { code: "27", name: "Tanah Diatome" },
-    { code: "28", name: "Tanah liat" },
-    { code: "29", name: "Pasir urug" },
-    { code: "30", name: "Batu Koral" },
-    { code: "31", name: "Andesit" },
-    { code: "32", name: "Tanah Urug, Tanah Puru, Tanah Sirtu" },
-    { code: "33", name: "Batu Kali" }
-  ];  
-
   const handleChange = (e) => {
-    const { name, value, type, options } = e.target;
+    const { name, value } = e.target;
 
-    if (type === 'select-multiple') {
-      const selectedOptions = Array.from(options)
-        .filter((option) => option.selected)
-        .map((option) => option.value);
-
-      setFormData({
-        ...formData,
-        [name]: selectedOptions,
-      });
-    } else {
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-    }
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
   const handleSubmit = (e) => {
@@ -136,9 +90,11 @@ const Minerba = () => {
               required
             />
             <datalist id="bahanMineralList">
-              {bahanMineralOptions.map((item) => (
+              {Array.from({ length: 33 }, (_, i) => ({
+                code: String(i + 1).padStart(2, '0'),
+              })).map((item) => (
                 <option key={item.code} value={item.code}>
-                  {item.code} - {item.name}
+                  {item.code}
                 </option>
               ))}
             </datalist>
@@ -179,22 +135,32 @@ const Minerba = () => {
             </div>
           </div>
 
+          {/* Sumber Pengambilan */}
           <div className="form-group">
-            <label htmlFor="lokasiPenambangan">Lokasi Penambangan</label>
-            <select
-              id="lokasiPenambangan"
-              name="lokasiPenambangan"
-              value={formData.lokasiPenambangan}
+            <label htmlFor="sumberPengambilan">Sumber Pengambilan (Kode)</label>
+            <input
+              type="text"
+              id="sumberPengambilan"
+              name="sumberPengambilan"
+              value={formData.sumberPengambilan}
               onChange={handleChange}
-              multiple
+              placeholder="Masukkan Kode Sumber Pengambilan"
+              list="sumberPengambilanList"
               required
-            >
-              <option value="Gunung">Gunung</option>
-              <option value="Lahan Tambang">Lahan Tambang</option>
-              <option value="Hutan">Hutan</option>
-            </select>
+            />
+            <datalist id="sumberPengambilanList">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </datalist>
+            <div className="keterangan">
+              <p>1 - Sumber alam di dalam bumi</p>
+              <p>2 - Sumber alam di permukaan bumi</p>
+              <p>3 - Sumber alam di dalam dan di permukaan bumi</p>
+            </div>
           </div>
 
+          {/* Jumlah (ton) */}
           <div className="form-group">
             <label htmlFor="jumlah">Jumlah (ton)</label>
             <input
@@ -204,6 +170,20 @@ const Minerba = () => {
               value={formData.jumlah}
               onChange={handleChange}
               placeholder="Masukkan jumlah"
+              required
+            />
+          </div>
+
+          {/* Harga Pasar */}
+          <div className="form-group">
+            <label htmlFor="hargaPasar">Harga Pasar (Rp)</label>
+            <input
+              type="number"
+              id="hargaPasar"
+              name="hargaPasar"
+              value={formData.hargaPasar}
+              onChange={handleChange}
+              placeholder="Masukkan Harga Pasar dalam Rupiah"
               required
             />
           </div>
