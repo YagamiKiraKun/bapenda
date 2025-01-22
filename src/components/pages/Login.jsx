@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Login.css';
 import { useNavigate } from 'react-router-dom';
-import logoDispenda from '../assets/logodispenda.png';  // Import gambar
+import logoDispenda from '../assets/logodispenda.png'; // Import gambar
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -10,12 +10,29 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // Cek username dan password
+    // Cek login untuk Wajib Pajak
     if (username === 'wp' && password === 'wp') {
-      navigate('/welcome');  // Arahkan ke halaman Welcome
-    } else {
+      navigate('/home'); // Arahkan ke halaman Home untuk mengisi formulir
+    } 
+    // Cek login untuk Admin
+    else if (username === 'admin' && password === 'admin') {
+      navigate('/login'); // Arahkan ke halaman Login
+      alert('Anda berhasil login sebagai Admin');
+      navigate('/welcome'); // Arahkan ke halaman Welcome sebagai Admin
+    } 
+    else {
       alert('Username atau Password salah');
     }
+  };
+
+  const handleRegister = () => {
+    navigate('/register'); // Arahkan ke halaman Register untuk wajib pajak
+  };
+
+  const handleAdminLogin = () => {
+    setUsername('admin'); // Set username untuk admin
+    setPassword('admin'); // Set password untuk admin
+    alert('Silakan tekan tombol LOGIN untuk masuk sebagai admin');
   };
 
   return (
@@ -50,6 +67,16 @@ const Login = () => {
           </div>
           <button type="submit" className="login-button">LOGIN</button>
         </form>
+        <div style={{ marginTop: '10px' }}>
+          <button className="login-button" onClick={handleRegister}>
+            Register
+          </button>
+        </div>
+        <div style={{ marginTop: '10px' }}>
+          <button className="login-button" onClick={handleAdminLogin}>
+            Login sebagai Admin
+          </button>
+        </div>
       </div>
     </div>
   );

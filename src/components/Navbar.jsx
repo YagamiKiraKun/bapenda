@@ -17,13 +17,8 @@ const Navbar = () => {
 
   // Fungsi untuk tombol Logout
   const handleLogout = () => {
-    if (isUserDashboard) {
-      // Jika di dashboard ADMIN
-      navigate('/'); // Kembali ke dashboard utama
-    } else {
-      // Jika di mode WP
-      navigate('/login'); // Kembali ke halaman login
-    }
+    console.log('Logging out...');
+    navigate('/login');  // Mengarahkan ke halaman login
   };
 
   return (
@@ -39,16 +34,9 @@ const Navbar = () => {
       {/* Navigation Buttons */}
       <div className="navbar-dropdown">
         {/* Tombol Home hanya muncul di halaman form dan halaman data, tidak di halaman welcome */}
-        {(isFormPage || isDataPage) && (
-          <button onClick={() => navigate(isFormPage ? '/' : '/welcome')}>
+        {(isFormPage || isDataPage) && !isUserDashboard && (
+          <button onClick={() => navigate('/home')}>
             <FaHome className="icon" /> Home
-          </button>
-        )}
-
-        {/* Tombol Switch User hanya muncul di halaman login */}
-        {isLoginPage && (
-          <button onClick={() => navigate('/login')}>
-            <FaSignOutAlt className="icon" /> Switch User
           </button>
         )}
 

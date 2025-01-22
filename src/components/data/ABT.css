@@ -1,30 +1,51 @@
 .data-container {
-    padding: 20px;
-    margin-top: 100px;
-  }
-  
-  .data-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-  }
-  
-  .data-table th,
-  .data-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
-  }
-  
-  .data-table th {
-    background-color: #f4f4f4;
-  }
-  
-  .data-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  .data-table tr:hover {
-    background-color: #f1f1f1;
-  }
-  
+  padding: 20px;
+  margin-top: 100px;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.data-table th,
+.data-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.data-table th {
+  background-color: #f4f4f4;
+}
+
+.data-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.data-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Styling for the eye button */
+.eye-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  display: inline-block;
+}
+
+.eye-button .icon {
+  width: 20px;
+  height: 20px;
+  color: #333;
+}
+
+/* Styling for the message text when eye icon is clicked */
+.detail-message {
+  margin-left: 10px;
+  color: #d9534f;  /* Warna merah untuk menonjolkan pesan */
+  font-weight: bold;
+}

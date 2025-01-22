@@ -1,75 +1,73 @@
-/* login.css */
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: url(${logoDispenda}) no-repeat center center fixed;  /* Gunakan gambar yang diimpor */
-    background-size: cover;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: url(${logoDispenda}) no-repeat center center fixed;  /* Gunakan gambar yang diimpor */
+  background-size: cover;
 }
 
-  
-  .login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
-  .login-box {
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 20px 40px;
-    text-align: center;
-    width: 400px;
-  }
-  
-  .login-logo .logo {
-    width: 60px;
-    height: auto;
-    margin-bottom: 20px;
-  }
-  
-  .login-title {
-    font-size: 18px;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  .login-form .input-group {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    background: #f9f9f9;
-    border-radius: 8px;
-    padding: 10px;
-  }
-  
-  .input-group .icon {
-    font-size: 18px;
-    margin-right: 10px;
-    color: #555;
-  }
-  
-  .login-input {
-    border: none;
-    outline: none;
-    width: 100%;
-    font-size: 14px;
-    background: transparent;
-  }
-  
-  .login-button {
-    background: #f9a825;
-    border: none;
-    color: white;
-    font-size: 16px;
-    padding: 10px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  
-  .login-button:hover {
-    background: #f57f17;
-  }
-  
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-box {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px 40px;
+  text-align: center;
+  width: 400px;
+}
+
+.login-logo .logo {
+  width: 60px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.login-title {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.login-form .input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.input-group .icon {
+  font-size: 18px;
+  margin-right: 10px;
+  color: #555;
+}
+
+.login-input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+  background: transparent;
+}
+
+.login-button {
+  background: #f9a825;
+  border: none;
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 10px; /* Spasi antar tombol */
+}
+
+.login-button:hover {
+  background: #f57f17;
+}
