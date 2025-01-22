@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios'; // Import axios untuk request ke backend
 import './Register.css'; // Mengimpor file CSS terpisah
 
 const RegistrationForm = () => {
@@ -23,23 +24,32 @@ const RegistrationForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Simulasi pengiriman data
+    // Simulasi pengiriman data ke backend
     console.log('Form Submitted:', formData);
-    // Reset form
-    setFormData({
-      username: '',
-      password: '',
-      confirmPassword: '',
-      namaUsaha: '',
-      jenisUsaha: '',
-      alamatUsaha: '',
-      nomorTeleponUsaha: '',
-      namaPemilik: '',
-      alamatPemilik: '',
-      nomorTeleponPemilik: '',
-    });
+
+    try {
+      const response = await axios.post('http://localhost:5002/register', formData);
+      console.log(response.data); // Menampilkan response dari server
+      alert('Registrasi berhasil!');
+      // Reset form
+      setFormData({
+        username: '',
+        password: '',
+        confirmPassword: '',
+        namaUsaha: '',
+        jenisUsaha: '',
+        alamatUsaha: '',
+        nomorTeleponUsaha: '',
+        namaPemilik: '',
+        alamatPemilik: '',
+        nomorTeleponPemilik: '',
+      });
+    } catch (error) {
+      console.error('Error during registration:', error);
+      alert('Terjadi kesalahan saat registrasi.');
+    }
   };
 
   return (
