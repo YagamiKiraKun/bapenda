@@ -11,6 +11,7 @@ import Minerba from './components/form/minerba';
 import PPJ from './components/form/ppj';
 import Restoran from './components/form/restoran';
 import Walet from './components/form/walet';
+import Hotel from './components/form/hotel';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/form/ppj" element={<PPJ />} />
         <Route path="/form/restoran" element={<Restoran />} />
         <Route path="/form/walet" element={<Walet />} />
+        <Route path="/form/hotel" element={<Hotel />} />
         <Route path="/home" element={<Home />} />
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/data/ABT" element={<ABT />} />
