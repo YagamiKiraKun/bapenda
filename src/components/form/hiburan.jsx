@@ -18,8 +18,8 @@ const Hiburan = () => {
     ],
     jumlahPertunjukanHariBiasaKali: "",
     jumlahPertunjukanHariLiburKali: "",
-    jumlahPertunjukanHariBiasaOrang: "",
-    jumlahPertunjukanHariLiburOrang: "",
+    jumlahPengunjungHariBiasaOrang: "",
+    jumlahPengunjungHariLiburOrang: "",
     jumlahMejaMesin: "",
     jumlahKamarRuangan: "",
     karcisBebas: "",
@@ -169,7 +169,6 @@ const Hiburan = () => {
                     <td>
                       <input
                         type="text"
-                        name={`kelas-${index}`}
                         value={row.kelas}
                         onChange={(e) =>
                           handleTableChange(index, "kelas", e.target.value)
@@ -180,7 +179,6 @@ const Hiburan = () => {
                     <td>
                       <input
                         type="number"
-                        name={`harga-${index}`}
                         value={row.harga}
                         onChange={(e) =>
                           handleTableChange(index, "harga", e.target.value)
@@ -194,12 +192,12 @@ const Hiburan = () => {
             </table>
           </div>
 
-          {/* Jumlah Pertunjukan - Hari Biasa & Libur (Kali) */}
+          {/* Jumlah Pertunjukan (khusus Pagelaran Musik dan Tari) */}
           {formData.hiburan === "Pagelaran Musik dan Tari" && (
             <>
               <div className="form-group">
                 <label>
-                  Jumlah Pertunjukan Rata-rata Hari Biasa
+                  Jumlah Pertunjukan Rata-rata Hari Biasa (kali)
                   <input
                     type="number"
                     name="jumlahPertunjukanHariBiasaKali"
@@ -211,7 +209,7 @@ const Hiburan = () => {
               </div>
               <div className="form-group">
                 <label>
-                  Jumlah Pertunjukan Rata-rata Hari Libur/Minggu
+                  Jumlah Pertunjukan Rata-rata Hari Libur (kali)
                   <input
                     type="number"
                     name="jumlahPertunjukanHariLiburKali"
@@ -224,14 +222,14 @@ const Hiburan = () => {
             </>
           )}
 
-          {/* Jumlah Pertunjukan - Hari Biasa & Libur (Orang) */}
+          {/* Jumlah Pengunjung */}
           <div className="form-group">
             <label>
-              Jumlah Pertunjukan Rata-rata Hari Biasa
+              Jumlah Pengunjung Rata-rata Hari Biasa (orang)
               <input
                 type="number"
-                name="jumlahPertunjukanHariBiasaOrang"
-                value={formData.jumlahPertunjukanHariBiasaOrang}
+                name="jumlahPengunjungHariBiasaOrang"
+                value={formData.jumlahPengunjungHariBiasaOrang}
                 onChange={handleChange}
                 placeholder="Orang"
               />
@@ -239,17 +237,110 @@ const Hiburan = () => {
           </div>
           <div className="form-group">
             <label>
-              Jumlah Pertunjukan Rata-rata Hari Libur/Minggu
+              Jumlah Pengunjung Rata-rata Hari Libur (orang)
               <input
                 type="number"
-                name="jumlahPertunjukanHariLiburOrang"
-                value={formData.jumlahPertunjukanHariLiburOrang}
+                name="jumlahPengunjungHariLiburOrang"
+                value={formData.jumlahPengunjungHariLiburOrang}
                 onChange={handleChange}
                 placeholder="Orang"
               />
             </label>
           </div>
-          {/* Rest of the form elements */}
+
+          {/* Jumlah Meja/Mesin (khusus Bilyard/Permainan Ketangkasan) */}
+          {(formData.hiburan === "Permainan Bilyard" ||
+            formData.hiburan === "Permainan Ketangkasan") && (
+            <div className="form-group">
+              <label>
+                Jumlah Meja/Mesin (buah)
+                <input
+                  type="number"
+                  name="jumlahMejaMesin"
+                  value={formData.jumlahMejaMesin}
+                  onChange={handleChange}
+                  placeholder="Buah"
+                />
+              </label>
+            </div>
+          )}
+
+          {/* Jumlah Kamar/Ruangan (khusus Panti Pijat/Mandi Uap/Karaoke) */}
+          {(formData.hiburan === "Panti Pijat" ||
+            formData.hiburan === "Mandi Uap" ||
+            formData.hiburan === "Karaoke") && (
+            <div className="form-group">
+              <label>
+                Jumlah Kamar/Ruangan (buah)
+                <input
+                  type="number"
+                  name="jumlahKamarRuangan"
+                  value={formData.jumlahKamarRuangan}
+                  onChange={handleChange}
+                  placeholder="Buah"
+                />
+              </label>
+            </div>
+          )}
+
+          {/* Karcis Bebas */}
+          <div className="form-group">
+            <label>Pernyataan Menyediakan Karcis Bebas (Free)</label>
+            <select
+              name="karcisBebas"
+              value={formData.karcisBebas}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Pilih</option>
+              <option value="Ya">Ya</option>
+              <option value="Tidak">Tidak</option>
+            </select>
+            {formData.karcisBebas === "Ya" && (
+              <input
+                type="number"
+                name="jumlahKarcisBebas"
+                value={formData.jumlahKarcisBebas}
+                onChange={handleChange}
+                placeholder="Jumlah Karcis (buah)"
+              />
+            )}
+          </div>
+
+          {/* Penjualan Mesin Tiket */}
+          <div className="form-group">
+            <label>Penjualan Karcis Menggunakan Mesin Tiket</label>
+            <select
+              name="penjualanMesinTiket"
+              value={formData.penjualanMesinTiket}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Pilih</option>
+              <option value="Ya">Ya</option>
+              <option value="Tidak">Tidak</option>
+            </select>
+          </div>
+
+          {/* Pembukuan/Pencatatan */}
+          <div className="form-group">
+            <label>Mengadakan Pembukuan/Pencatatan</label>
+            <select
+              name="melaksanakanPembukuan"
+              value={formData.melaksanakanPembukuan}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Pilih</option>
+              <option value="Ya">Ya</option>
+              <option value="Tidak">Tidak</option>
+            </select>
+          </div>
+
+          {/* Submit Button */}
+          <div className="form-group">
+            <button type="submit">Submit</button>
+          </div>
         </form>
       </div>
     </div>
