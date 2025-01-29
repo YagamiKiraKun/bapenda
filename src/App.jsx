@@ -14,6 +14,7 @@ import Walet from './components/form/walet';
 import Hotel from './components/form/hotel';
 import Parkir from './components/form/parkir';
 import Hiburan from './components/form/hiburan';
+import Reklame from './components/form/reklame';
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="/form/hotel" element={<Hotel />} />
         <Route path="/form/parkir" element={<Parkir />} />
         <Route path="/form/hiburan" element={<Hiburan />} />
+        <Route path="/form/reklame" element={<Reklame />} />
         <Route path="/home" element={<Home />} />
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/data/ABT" element={<ABT />} />
