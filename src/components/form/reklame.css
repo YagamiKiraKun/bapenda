@@ -18,6 +18,7 @@
   
   .form-group {
     margin-bottom: 15px;
+    margin-top: 15px;
   }
   
   .form-group label {
@@ -63,5 +64,20 @@
     font-weight: bold; /* Membuat teks lebih tebal */
     margin-bottom: 10px; /* Menambahkan sedikit jarak di bawah judul */
   }
+
+  .input-wrapper {
+    display: flex;
+    align-items: center;
+  }
+  
+  .masa-pajak-input {
+    width: 80px; /* Ukuran input lebih kecil */
+    margin-right: 8px;
+  }
+  
+  .masa-pajak-label {
+    font-size: 14px;
+  }
+  
   
   
