@@ -1,24 +1,27 @@
 import React from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { FaHome, FaSignOutAlt } from 'react-icons/fa';
 import './Navbar.css';
 import logo from './assets/logodispenda.png';
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-
-  // Menentukan halaman saat ini
-  const isDashboard = location.pathname === '/'; // Dashboard utama
-  const isFormPage = location.pathname.startsWith('/form/'); // Halaman form
-  const isLoginPage = location.pathname === '/login'; // Halaman login
-  const isUserDashboard = location.pathname === '/welcome'; // Dashboard user setelah login
-  const isDataPage = location.pathname.startsWith('/data/'); // Halaman data seperti /data/ABT
+  const userRole = localStorage.getItem('userRole'); // Ambil peran pengguna dari localStorage
 
   // Fungsi untuk tombol Logout
   const handleLogout = () => {
     console.log('Logging out...');
+    localStorage.removeItem('userRole'); // Hapus peran pengguna saat logout
     navigate('/login');  // Mengarahkan ke halaman login
+  };
+
+  // Menentukan halaman Home berdasarkan peran pengguna
+  const handleHomeNavigation = () => {
+    if (userRole === 'admin') {
+      navigate('/welcome');
+    } else {
+      navigate('/home');
+    }
   };
 
   return (
@@ -33,14 +36,12 @@ const Navbar = () => {
 
       {/* Navigation Buttons */}
       <div className="navbar-dropdown">
-        {/* Tombol Home hanya muncul di halaman form dan halaman data, tidak di halaman welcome */}
-        {(isFormPage || isDataPage) && !isUserDashboard && (
-          <button onClick={() => navigate('/home')}>
-            <FaHome className="icon" /> Home
-          </button>
-        )}
+        {/* Tombol Home selalu muncul dengan tujuan sesuai peran */}
+        <button onClick={handleHomeNavigation}>
+          <FaHome className="icon" /> Home
+        </button>
 
-        {/* Tombol Logout */}
+        {/* Tombol Logout selalu muncul */}
         <button onClick={handleLogout}>
           <FaSignOutAlt className="icon" /> Logout
         </button>

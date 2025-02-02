@@ -16,29 +16,31 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+  
     if (username === 'admin' && password === 'admin') {
       // Login sebagai admin
+      localStorage.setItem('userRole', 'admin'); // Simpan role admin
       alert('Anda berhasil login sebagai Admin');
       navigate('/welcome');
       return;
     }
-
+  
     try {
       // Login sebagai Wajib Pajak (WP)
       const { data, error } = await supabase
         .from('wajib_pajak')
         .select('*')
         .eq('username', username)
-        .eq('password', password); // Pastikan password terenkripsi di database
-
+        .eq('password', password);
+  
       if (error) {
         console.error('Login error:', error);
         alert('Terjadi kesalahan saat login.');
         return;
       }
-
+  
       if (data.length > 0) {
+        localStorage.setItem('userRole', 'wajibpajak'); // Simpan role wajib pajak
         alert('Login berhasil sebagai Wajib Pajak');
         navigate('/home');
       } else {
@@ -49,6 +51,7 @@ const Login = () => {
       alert('Terjadi kesalahan tak terduga.');
     }
   };
+  
 
   const handleRegister = () => {
     navigate('/register');
@@ -84,7 +87,7 @@ const Login = () => {
               required
             />
           </div>
-          <button type="submit" className="login-button">LOGIN</button>
+          <button type="submit" className="login-button">Login</button>
         </form>
         <div style={{ marginTop: '10px' }}>
           <button className="login-button" onClick={handleRegister}>

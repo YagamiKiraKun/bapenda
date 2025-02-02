@@ -2,7 +2,9 @@
 .home-container {
     font-family: 'Arial', sans-serif;
     text-align: center;
-    padding: 40px 20px;
+    padding: 100px 20px 40px; /* Memberi ruang untuk navbar */
+    position: relative;
+    min-height: 100vh; /* Agar konten memenuhi layar */
 }
 
 .home-container::before {
@@ -25,36 +27,60 @@
     font-size: 2rem;
     color: #333;
     margin-bottom: 30px;
+    background: rgba(255, 255, 255, 0.6); /* Efek glossy halus */
+    backdrop-filter: blur(10px); /* Efek blur untuk memberikan kesan glossy */
+    letter-spacing: 0.8px; /* Sedikit jarak antar huruf untuk kesan elegan */
+    text-transform: capitalize; /* Membuat setiap kata dimulai dengan huruf besar */
+    font-weight: bold; /* Membuat teks tetap bold */
+    text-align: center;
+    margin: 20px auto;
+    position: relative;
+    padding: 20px;
+    border-radius: 20px;
 }
 
 /* Grid untuk menu */
 .menu-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 kolom */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Menyesuaikan dengan ukuran layar */
     gap: 20px; /* Jarak antar item */
-    justify-content: center; /* Pusatkan grid */
-    max-width: 600px; /* Batasi lebar total grid */
-    margin: 0 auto; /* Supaya grid tetap di tengah */
+    justify-content: center;
+    max-width: 1000px; /* Batasi lebar maksimal grid */
+    margin: 0 auto; /* Pusatkan grid */
+    padding: 10px;
 }
 
 /* Gaya item menu */
 .menu-item {
-    background-color: #d9d9d9;
-    color: #333;
+    background-color: #fff; /* Mengubah warna latar belakang tombol menjadi putih */
+    color: #ffffff;
     padding: 20px;
     width: 350px; /* Ukuran tetap */
     height: 200px; /* Ukuran tetap */
     display: flex;
-    justify-content: center;
+    justify-content: flex-start; /* Posisi gambar dan teks dimulai dari kiri */
     align-items: center;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease-in-out;
     font-weight: bold;
     font-size: 14px;
-    text-align: center;
+    text-align: left; /* Teks di kiri */
+    padding-left: 10px; /* Memberikan sedikit jarak antara ikon dan teks */
 }
 
+.menu-item .text {
+    font-size: 20px; /* Memperbesar teks dalam button */
+}
+
+/* Gaya ikon pada menu item */
+.menu-item img {
+    width: 60px; /* Ukuran gambar ikon */
+    height: 60px; /* Ukuran gambar ikon */
+    margin-right: 30px; /* Jarak antara ikon dan teks */
+}
+
+/* Efek hover untuk memperbesar tombol */
 .menu-item:hover {
     transform: scale(1.05);
 }
@@ -70,30 +96,18 @@
     color: #333; /* Warna teks gelap untuk kontras */
     text-align: center;
     margin: 20px auto;
-    max-width: 600px;
+    max-width: 700px;
     position: relative;
-    padding: 8px;
+    padding: 2px;
     letter-spacing: 0.8px; /* Sedikit jarak antar huruf untuk kesan elegan */
     text-transform: capitalize; /* Membuat setiap kata dimulai dengan huruf besar */
     z-index: 1;
-}
-
-/* Efek glossy */
-.home-message::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.4); /* Efek glossy halus */
+    background: rgba(255, 255, 255, 0.5); /* Efek glossy halus */
     border-radius: 10px;
-    z-index: -1;
-    backdrop-filter: blur(5px); /* Efek blur untuk memberikan kesan glossy */
 }
 
 /* Efek transisi halus pada hover */
 .home-message:hover {
-    color: #0066cc; /* Ganti warna teks saat hover untuk efek interaktif */
-    transition: color 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+    background: rgba(255, 255, 255, 0.8); /* Efek glossy halus */
 }

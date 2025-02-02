@@ -19,13 +19,22 @@ label {
 }
 
 .input,
-.textarea {
+.textarea,
+.select {
     width: 96%;
     padding: 10px;
     margin-top: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
     position: relative;
+}
+
+/* Perbaikan untuk dropdown */
+.select {
+    background-color: #fff;
+    appearance: none;  /* Hilangkan gaya bawaan browser */
+    padding-right: 0px; /* Beri ruang untuk ikon dropdown */
+    cursor: pointer;
 }
 
 .textarea {
@@ -44,5 +53,5 @@ label {
 }
 
 .button:hover {
-    background-color: #45a049;
+    background-color: #f57f17;
 }

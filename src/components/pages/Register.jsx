@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { createClient } from '@supabase/supabase-js'; // Import Supabase
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import './Register.css'; // Mengimpor file CSS terpisah
 
 // Inisialisasi Supabase
@@ -8,6 +9,7 @@ const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const RegistrationForm = () => {
+  const navigate = useNavigate(); // Initialize useNavigate
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -70,6 +72,9 @@ const RegistrationForm = () => {
           alamatPemilik: '',
           nomorTeleponPemilik: '',
         });
+
+        // Arahkan ke halaman login setelah berhasil registrasi
+        navigate('/login'); // Ganti '/login' dengan rute halaman login Anda
       }
     } catch (error) {
       console.error('Unexpected error:', error);

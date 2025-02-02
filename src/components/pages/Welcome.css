@@ -2,7 +2,9 @@
 .welcome-container {
     font-family: 'Arial', sans-serif;
     text-align: center;
-    padding: 40px 20px;
+    padding: 100px 20px 40px; /* Memberi ruang untuk navbar */
+    position: relative;
+    min-height: 100vh; /* Agar konten memenuhi layar */
 }
 
 .welcome-container::before {
@@ -12,7 +14,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../assets/backgroundBapenda.jpg'); /* Sesuaikan jalur gambar */
+    background-image: url('../assets/backgroundBapenda.jpg'); 
     background-size: cover; /* Pastikan gambar mengisi seluruh area */
     background-position: center; /* Fokuskan gambar di tengah */
     background-repeat: no-repeat; /* Hindari pengulangan gambar */
@@ -25,6 +27,16 @@
     font-size: 2rem;
     color: #333;
     margin-bottom: 30px;
+    background: rgba(255, 255, 255, 0.6); /* Efek glossy halus */
+    backdrop-filter: blur(10px); /* Efek blur untuk memberikan kesan glossy */
+    letter-spacing: 0.8px; /* Sedikit jarak antar huruf untuk kesan elegan */
+    text-transform: capitalize; /* Membuat setiap kata dimulai dengan huruf besar */
+    font-weight: bold; /* Membuat teks tetap bold */
+    text-align: center;
+    margin: 20px auto;
+    position: relative;
+    padding: 20px;
+    border-radius: 20px;
 }
 
 /* Grid untuk menu */
@@ -61,4 +73,27 @@
 
 .menu-item:active {
     transform: scale(0.95);
+}
+
+/* Gaya untuk pesan selamat datang */
+.welcome-message {
+    font-size: 1.2rem; /* Ukuran font yang lebih kecil */
+    font-weight: bold; /* Membuat teks tetap bold */
+    color: #333; /* Warna teks gelap untuk kontras */
+    text-align: center;
+    margin: 20px auto;
+    max-width: 700px;
+    position: relative;
+    padding: 2px;
+    letter-spacing: 0.8px; /* Sedikit jarak antar huruf untuk kesan elegan */
+    text-transform: capitalize; /* Membuat setiap kata dimulai dengan huruf besar */
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.5); /* Efek glossy halus */
+    border-radius: 10px;
+}
+
+/* Efek transisi halus pada hover */
+.welcome-message:hover {
+    transition: 0.3s ease-in-out;
+    background: rgba(255, 255, 255, 0.8); /* Efek glossy halus */
 }
