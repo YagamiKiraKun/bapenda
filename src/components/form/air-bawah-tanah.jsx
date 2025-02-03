@@ -1,12 +1,11 @@
-import React, { useState, useEffect} from 'react';
-import { useNavigate } from 'react-router-dom'; // Tambahkan useNavigate
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import supabase from '../supabase';
 import './air-bawah-tanah.css';
 import Navbar from '../Navbar';
 
 const AirBawahTanah = () => {
-  const navigate = useNavigate(); // Inisialisasi navigasi
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     npwpd: '',
     nama: '',
@@ -17,7 +16,28 @@ const AirBawahTanah = () => {
     tanggal: '',
   });
 
+  // Fetch data wajib_pajak dari Supabase
+  useEffect(() => {
+    const fetchWajibPajak = async () => {
+      const { data, error } = await supabase
+        .from('wajib_pajak')
+        .select('npwpd, nama_usaha, alamat_usaha')
+        .limit(1); // Sesuaikan query sesuai kebutuhan
 
+      if (error) {
+        console.error('Error fetching data:', error);
+      } else if (data && data.length > 0) {
+        setFormData({
+          ...formData,
+          npwpd: data[0].npwpd,
+          nama: data[0].nama_usaha,
+          alamat: data[0].alamat_usaha,
+        });
+      }
+    };
+
+    fetchWajibPajak();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,26 +47,19 @@ const AirBawahTanah = () => {
     });
   };
 
-  const npwpd = localStorage.getItem('npwpd'); // Ambil dari Local Storage
-  console.log('NPWPD:', npwpd);
-
-  const nama_usaha = localStorage.getItem('nama_usaha'); // Ambil dari Local Storage
-  console.log(nama_usaha);
-
-  const alamat_usaha = localStorage.getItem('alamat_usaha'); // Ambil dari Local Storage
-
-  // CREATE (Tambah Data)
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { error } = await supabase.from('air_bawah_tanah').insert([formData]);
-    if (error) console.error('Error inserting data:', error);
-    else {
-      setFormData({ npwpd: '', nama: '', alamat: '', jenis_air: '', debit: '', lokasi_air: '', tanggal: '' });
-      fetchData();
+    try {
+      const { error } = await supabase.from('air_bawah_tanah').insert([formData]);
+      if (error) throw error;
+
+      alert('Data berhasil disimpan');
       navigate('/penilaian');
+    } catch (error) {
+      console.error('Error inserting data:', error);
+      alert('Gagal menyimpan data.');
     }
   };
-
 
   return (
     <div>
@@ -60,10 +73,7 @@ const AirBawahTanah = () => {
               type="text"
               id="npwpd"
               name="npwpd"
-              value={npwpd}
-              onChange={(e) => setFormData({ ...formData, npwpd: e.target.value })}
-              placeholder="Masukkan NPWPD"
-              required
+              value={formData.npwpd}
               readOnly
             />
           </div>
@@ -74,10 +84,7 @@ const AirBawahTanah = () => {
               type="text"
               id="nama"
               name="nama"
-              value={nama_usaha}
-              onChange={(e) => setFormData({ ...formData, nama: e.target.value })}
-              placeholder="Masukkan Nama Wajib Pajak"
-              required
+              value={formData.nama}
               readOnly
             />
           </div>
@@ -88,10 +95,7 @@ const AirBawahTanah = () => {
               type="text"
               id="alamat"
               name="alamat"
-              value={alamat_usaha}
-              onChange={(e) => setFormData({ ...formData, alamat: e.target.value })}
-              placeholder="Masukkan alamat"
-              required
+              value={formData.alamat}
               readOnly
             />
           </div>
@@ -102,7 +106,7 @@ const AirBawahTanah = () => {
               id="jenis_air"
               name="jenis_air"
               value={formData.jenis_air}
-              onChange={(e) => setFormData({ ...formData, jenis_air: e.target.value })}
+              onChange={handleChange}
               required
             >
               <option value="">Pilih Jenis Sumber Air</option>
@@ -117,7 +121,7 @@ const AirBawahTanah = () => {
               id="lokasi_air"
               name="lokasi_air"
               value={formData.lokasi_air}
-              onChange={(e) => setFormData({ ...formData, lokasi_air: e.target.value })}
+              onChange={handleChange}
               required
             >
               <option value="">Pilih Lokasi Sumber Air</option>
@@ -134,7 +138,7 @@ const AirBawahTanah = () => {
               id="debit"
               name="debit"
               value={formData.debit}
-              onChange={(e) => setFormData({ ...formData, debit: e.target.value })}
+              onChange={handleChange}
               placeholder="Masukkan debit"
               required
             />
@@ -147,7 +151,7 @@ const AirBawahTanah = () => {
               id="tanggal"
               name="tanggal"
               value={formData.tanggal}
-              onChange={(e) => setFormData({ ...formData, tanggal: e.target.value })}
+              onChange={handleChange}
               required
             />
           </div>
