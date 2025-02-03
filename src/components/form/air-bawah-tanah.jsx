@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Tambahkan useNavigate
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './air-bawah-tanah.css';
 import Navbar from '../Navbar';
 
 const AirBawahTanah = () => {
-  const navigate = useNavigate(); // Inisialisasi navigasi
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     npwpd: '',
     nama: '',
@@ -14,6 +14,14 @@ const AirBawahTanah = () => {
     lokasiAir: '',
     tanggal: '',
   });
+
+  useEffect(() => {
+    // Generate NPWPD otomatis saat form dimuat
+    setFormData((prevData) => ({
+      ...prevData,
+      npwpd: `NPWPD-${Date.now()}`, // Format NPWPD unik dengan timestamp
+    }));
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,8 +33,12 @@ const AirBawahTanah = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData); // Log data formulir
-    navigate('/penilaian'); // Navigasikan ke halaman "penilaian"
+    console.log(formData);
+    
+    // Simpan ke local storage agar bisa diakses di halaman lain
+    localStorage.setItem('formDataAir', JSON.stringify(formData));
+
+    navigate('/penilaian');
   };
 
   return (
@@ -42,9 +54,7 @@ const AirBawahTanah = () => {
               id="npwpd"
               name="npwpd"
               value={formData.npwpd}
-              onChange={handleChange}
-              placeholder="Masukkan NPWPD"
-              required
+              readOnly // Tidak bisa diedit karena auto-generate
             />
           </div>
 
@@ -114,6 +124,7 @@ const AirBawahTanah = () => {
               value={formData.debit}
               onChange={handleChange}
               placeholder="Masukkan debit"
+              min="0.01" // Tidak boleh 0 atau negatif
               required
             />
           </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { createClient } from '@supabase/supabase-js'; // Import Supabase
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import './Register.css'; // Mengimpor file CSS terpisah
+import { createClient } from '@supabase/supabase-js';
+import { useNavigate } from 'react-router-dom';
+import './Register.css';
 
 // Inisialisasi Supabase
 const supabaseUrl = 'https://eqcxtqctngivgazzhudt.supabase.co';
@@ -9,7 +9,7 @@ const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const RegistrationForm = () => {
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -20,7 +20,7 @@ const RegistrationForm = () => {
     nomorTeleponUsaha: '',
     namaPemilik: '',
     alamatPemilik: '',
-    nomorTeleponPemilik: '',
+    nomorTeleponPemilik: ''
   });
 
   const handleChange = (e) => {
@@ -33,29 +33,31 @@ const RegistrationForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (formData.password !== formData.confirmPassword) {
       alert('Password dan Konfirmasi Password tidak cocok!');
       return;
     }
-  
+
     try {
+      const npwpd = `NPWPD-${Date.now()}`; // Generate NPWPD unik
       const { data, error } = await supabase.from('wajib_pajak').insert([
         {
           username: formData.username,
           password: formData.password,
+          npwpd: npwpd,
           nama_usaha: formData.namaUsaha,
           jenis_usaha: formData.jenisUsaha,
           alamat_usaha: formData.alamatUsaha,
           nomor_telepon_usaha: formData.nomorTeleponUsaha,
           nama_pemilik: formData.namaPemilik,
           alamat_pemilik: formData.alamatPemilik,
-          nomor_telepon_pemilik: formData.nomorTeleponPemilik,
+          nomor_telepon_pemilik: formData.nomorTeleponPemilik
         },
       ]);
-  
+
       if (error) {
-        console.error('Error during registration:', error); // Lebih rinci
+        console.error('Error during registration:', error);
         alert(`Terjadi kesalahan saat registrasi: ${error.message}`);
       } else {
         console.log('Registration successful:', data);
@@ -70,25 +72,21 @@ const RegistrationForm = () => {
           nomorTeleponUsaha: '',
           namaPemilik: '',
           alamatPemilik: '',
-          nomorTeleponPemilik: '',
+          nomorTeleponPemilik: ''
         });
 
-        // Arahkan ke halaman login setelah berhasil registrasi
-        navigate('/login'); // Ganti '/login' dengan rute halaman login Anda
+        navigate('/login');
       }
     } catch (error) {
       console.error('Unexpected error:', error);
       alert('Terjadi kesalahan tak terduga: ' + error.message);
     }
   };
-  
-  
 
   return (
     <div className="container">
       <h2>Form Pendaftaran</h2>
       <form onSubmit={handleSubmit}>
-        {/* A. Identitas Usaha */}
         <div className="formGroup">
           <label htmlFor="username">Username</label>
           <input
@@ -178,7 +176,7 @@ const RegistrationForm = () => {
         </div>
 
         <div className="formGroup">
-          <label htmlFor="nomorTeleponUsaha">Nomor Telepon</label>
+          <label htmlFor="nomorTeleponUsaha">Nomor Telepon Usaha</label>
           <input
             type="tel"
             id="nomorTeleponUsaha"
@@ -190,7 +188,6 @@ const RegistrationForm = () => {
           />
         </div>
 
-        {/* B. Identitas Pemilik Usaha */}
         <div className="formGroup">
           <label htmlFor="namaPemilik">Nama Pemilik</label>
           <input
