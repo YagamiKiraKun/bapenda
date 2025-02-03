@@ -18,7 +18,7 @@ const Login = () => {
     e.preventDefault();
   
     if (username === 'admin' && password === 'admin') {
-      // Login sebagai admin
+      // Login sebagai Admin
       localStorage.setItem('userRole', 'admin'); // Simpan role admin
       alert('Anda berhasil login sebagai Admin');
       navigate('/welcome');
@@ -29,9 +29,10 @@ const Login = () => {
       // Login sebagai Wajib Pajak (WP)
       const { data, error } = await supabase
         .from('wajib_pajak')
-        .select('*')
+        .select('npwpd, nama_usaha, alamat_usaha') // Ambil NPWPD, nama_usaha, dan alamat_usaha
         .eq('username', username)
-        .eq('password', password);
+        .eq('password', password)
+        .single(); // Karena username seharusnya unik, kita pakai .single()
   
       if (error) {
         console.error('Login error:', error);
@@ -39,8 +40,11 @@ const Login = () => {
         return;
       }
   
-      if (data.length > 0) {
-        localStorage.setItem('userRole', 'wajibpajak'); // Simpan role wajib pajak
+      if (data) {
+        localStorage.setItem('userRole', 'wajibpajak'); // Simpan role
+        localStorage.setItem('npwpd', data.npwpd); // Simpan NPWPD ke Local Storage
+        localStorage.setItem('nama_usaha', data.nama_usaha); // Simpan Nama Usaha ke Local Storage
+        localStorage.setItem('alamat_usaha', data.alamat_usaha); // Simpan Alamat Usaha ke Local Storage
         alert('Login berhasil sebagai Wajib Pajak');
         navigate('/home');
       } else {
@@ -51,6 +55,8 @@ const Login = () => {
       alert('Terjadi kesalahan tak terduga.');
     }
   };
+  
+  
   
 
   const handleRegister = () => {
