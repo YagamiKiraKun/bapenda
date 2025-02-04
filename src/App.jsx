@@ -6,6 +6,7 @@ import Welcome from './components/pages/Welcome';
 import ABT from './components/data/ABT';
 import AirBawahTanah from './components/form/air-bawah-tanah';
 import Penilaian from './components/pages/Penilaian';
+import PenilaianMinerba from './components/pages/PenilaianMinerba';
 import RegistrationForm from './components/pages/Register';
 import Minerba from './components/form/minerba';
 import PPJ from './components/form/ppj';
@@ -16,6 +17,7 @@ import Parkir from './components/form/parkir';
 import Hiburan from './components/form/hiburan';
 import Reklame from './components/form/reklame';
 import Cetak from './components/pages/Cetak';
+import CetakMinerba from './components/pages/CetakMinerba';
 
 const App = () => {
   return (
@@ -36,8 +38,10 @@ const App = () => {
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/data/ABT" element={<ABT />} />
         <Route path="/penilaian" element={<Penilaian />} />
+        <Route path="/penilaianminerba" element={<PenilaianMinerba />} />
         <Route path="/register" element={<RegistrationForm />} />
         <Route path="/cetak" element={<Cetak />} />
+        <Route path="/cetakminerba" element={<CetakMinerba />} />
       </Routes>
     </Router>
   );  

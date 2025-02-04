@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import supabase from '../supabase';
 import './minerba.css';
 import Navbar from '../Navbar';
 
@@ -9,27 +10,51 @@ const Minerba = () => {
     npwpd: '',
     nama: '',
     alamat: '',
-    namaBahanMineral: '',
+    nama_bahan_mineral: '',
     jumlah: '',
-    hargaPasar: '',
-    sumberPengambilan: '',
+    harga_pasar: '',
+    sumber_pengambilan: '',
     tanggal: '',
   });
 
+  const npwpd = localStorage.getItem("npwpd");
+  const nama_usaha = localStorage.getItem("nama_usaha");
+  const alamat_usaha = localStorage.getItem("alamat_usaha");
+
+  useEffect(() => {
+      const npwpd = localStorage.getItem("npwpd") || "";
+      const nama_usaha = localStorage.getItem("nama_usaha") || "";
+      const alamat_usaha = localStorage.getItem("alamat_usaha") || "";
+      setFormData((prevData) => ({
+        ...prevData,
+        npwpd,
+        nama: nama_usaha,
+        alamat: alamat_usaha,
+      }));
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setFormData({
       ...formData,
       [name]: value,
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData); // Log data formulir
-    navigate('/penilaian'); // Navigasikan ke halaman penilaian
+    try {
+      const { data, error } = await supabase.from('minerba').insert([formData]);
+      if (error) throw error;
+  
+      alert('Data berhasil disimpan');
+      navigate('/penilaianminerba');
+    } catch (error) {
+      console.error('Error inserting data:', error);
+      alert('Gagal menyimpan data. ' + error.message);
+    }
   };
+ 
 
   return (
     <div>
@@ -43,10 +68,8 @@ const Minerba = () => {
               type="text"
               id="npwpd"
               name="npwpd"
-              value={formData.npwpd}
-              onChange={handleChange}
-              placeholder="Masukkan NPWPD"
-              required
+              value={npwpd}
+              readOnly
             />
           </div>
 
@@ -56,10 +79,8 @@ const Minerba = () => {
               type="text"
               id="nama"
               name="nama"
-              value={formData.nama}
-              onChange={handleChange}
-              placeholder="Masukkan Nama Wajib Pajak"
-              required
+              value={nama_usaha}
+              readOnly
             />
           </div>
 
@@ -69,21 +90,19 @@ const Minerba = () => {
               type="text"
               id="alamat"
               name="alamat"
-              value={formData.alamat}
-              onChange={handleChange}
-              placeholder="Masukkan alamat"
-              required
+              value={alamat_usaha}
+              readOnly
             />
           </div>
 
           {/* Nama Bahan Mineral */}
           <div className="form-group">
-            <label htmlFor="namaBahanMineral">Nama Bahan Mineral (Kode)</label>
+            <label htmlFor="nama_bahan_mineral">Nama Bahan Mineral (Kode)</label>
             <input
               type="text"
-              id="namaBahanMineral"
-              name="namaBahanMineral"
-              value={formData.namaBahanMineral}
+              id="nama_bahan_mineral"
+              name="nama_bahan_mineral"
+              value={formData.nama_bahan_mineral}
               onChange={handleChange}
               placeholder="Masukkan Kode Nama Bahan Mineral"
               list="bahanMineralList"
@@ -137,12 +156,12 @@ const Minerba = () => {
 
           {/* Sumber Pengambilan */}
           <div className="form-group">
-            <label htmlFor="sumberPengambilan">Sumber Pengambilan (Kode)</label>
+            <label htmlFor="sumber_pengambilan">Sumber Pengambilan (Kode)</label>
             <input
               type="text"
-              id="sumberPengambilan"
-              name="sumberPengambilan"
-              value={formData.sumberPengambilan}
+              id="sumber_pengambilan"
+              name="sumber_pengambilan"
+              value={formData.sumber_pengambilan}
               onChange={handleChange}
               placeholder="Masukkan Kode Sumber Pengambilan"
               list="sumberPengambilanList"
@@ -176,12 +195,12 @@ const Minerba = () => {
 
           {/* Harga Pasar */}
           <div className="form-group">
-            <label htmlFor="hargaPasar">Harga Pasar (Rp)</label>
+            <label htmlFor="harga_pasar">Harga Pasar (Rp)</label>
             <input
               type="number"
-              id="hargaPasar"
-              name="hargaPasar"
-              value={formData.hargaPasar}
+              id="harga_pasar"
+              name="harga_pasar"
+              value={formData.harga_pasar}
               onChange={handleChange}
               placeholder="Masukkan Harga Pasar dalam Rupiah"
               required
