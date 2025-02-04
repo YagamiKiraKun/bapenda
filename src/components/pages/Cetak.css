@@ -1,0 +1,101 @@
+/* Container utama */
+.cetak-container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f4f4f4;
+  }
+  
+  /* Wrapper khusus yang akan dicetak */
+  .print-container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: auto;
+    position: relative;
+  }
+  
+  /* Navbar hanya muncul saat browsing, tidak ikut cetak */
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+    .print-only {
+      display: block !important;
+    }
+  }
+  
+  /* Logo hanya muncul di cetakan */
+  .print-only {
+    display: none;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .logo-container {
+    text-align: left;
+  }
+  
+  .logo-dispenda {
+    width: 50px; /* Sesuaikan ukuran logo */
+    height: auto;
+  }
+  
+  /* Judul & subjudul */
+  .title {
+    text-align: center;
+    color: #333;
+  }
+  
+  /* Bagian Data */
+  .data-section {
+    margin-top: 20px;
+  }
+  
+  .section-title {
+    color: #444;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+  }
+  
+  /* Tabel */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .data-label {
+    padding: 8px;
+    font-weight: bold;
+    color: #555;
+    text-transform: capitalize;
+  }
+  
+  .data-value {
+    padding: 8px;
+    color: #333;
+  }
+  
+  /* Tombol Cetak (hanya muncul saat browsing, tidak ikut cetak) */
+  .button-container {
+    text-align: right;
+  }
+  
+  .print-button {
+    background: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease;
+  }
+  
+  .print-button:hover {
+    background: #0056b3;
+  }
+  

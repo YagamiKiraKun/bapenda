@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../Navbar';
 import { useNavigate } from 'react-router-dom';
 import supabase from '../supabase';
+import './Cetak.css'; // Import file CSS terpisah
+import logoDispenda from '../assets/logodispenda.png'; // Pastikan path benar
 
 const Cetak = () => {
   const navigate = useNavigate();
@@ -41,78 +43,53 @@ const Cetak = () => {
   }, [npwpd]);
 
   return (
-    <div style={{ fontFamily: 'Arial, sans-serif', padding: '20px', backgroundColor: '#f4f4f4' }}>
-      <div className="print-container">
-        <h1 style={{ textAlign: 'center', color: '#333' }}>Cetak Data Wajib Pajak</h1>
-        <p style={{ textAlign: 'center', color: '#666' }}>Anda login sebagai Wajib Pajak, Silahkan pilih Kategori Pajak</p>
+    <div className="cetak-container">
+      {/* Navbar hanya untuk tampilan, tidak ikut cetak */}
+      <div className="no-print">
+        <Navbar />
+      </div>
 
+      <div className="print-container">
+        {/* Logo hanya muncul saat dicetak */}
+        <div className="print-only logo-container">
+          <img src={logoDispenda} alt="Logo Dispenda" className="logo-dispenda" />
+        </div>
+
+        <h1 className="title">Lembar Data Wajib Pajak</h1>
         {dataPenilaian && dataAirBawahTanah ? (
-          <div style={{ marginTop: '20px' }}>
-            <h2 style={{ color: '#444', borderBottom: '2px solid #ddd', paddingBottom: '5px' }}>📌 Data Penilaian</h2>
-            <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }}>
+          <div className="data-section">
+            <h2 className="section-title">📌 Data Penilaian</h2>
+            <table className="data-table">
               <tbody>
                 {Object.entries(dataPenilaian).map(([key, value]) => (
-                  <tr key={key} style={{ borderBottom: '1px solid #ddd' }}>
-                    <td style={{ padding: '8px', fontWeight: 'bold', color: '#555', textTransform: 'capitalize' }}>
-                      {key.replace('_', ' ')}
-                    </td>
-                    <td style={{ padding: '8px', color: '#333' }}>{value}</td>
+                  <tr key={key}>
+                    <td className="data-label">{key.replace('_', ' ')}</td>
+                    <td className="data-value">{value}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
 
-            <h2 style={{ color: '#444', borderBottom: '2px solid #ddd', paddingBottom: '5px' }}>💧 Data Air Bawah Tanah</h2>
-            <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }}>
+            <h2 className="section-title">💧 Data Air Bawah Tanah</h2>
+            <table className="data-table">
               <tbody>
                 {Object.entries(dataAirBawahTanah).map(([key, value]) => (
-                  <tr key={key} style={{ borderBottom: '1px solid #ddd' }}>
-                    <td style={{ padding: '8px', fontWeight: 'bold', color: '#555', textTransform: 'capitalize' }}>
-                      {key.replace('_', ' ')}
-                    </td>
-                    <td style={{ padding: '8px', color: '#333' }}>{value}</td>
+                  <tr key={key}>
+                    <td className="data-label">{key.replace('_', ' ')}</td>
+                    <td className="data-value">{value}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
 
-            <div className="no-print" style={{ textAlign: 'right' }}>
-              <button 
-                onClick={() => window.print()} 
-                style={{
-                  background: '#007bff',
-                  color: 'white',
-                  padding: '10px 15px',
-                  border: 'none',
-                  borderRadius: '5px',
-                  cursor: 'pointer',
-                  fontSize: '16px'
-                }}
-              >
-                🖨 Cetak Data
-              </button>
+            <div className="no-print button-container">
+              <button onClick={() => window.print()} className="print-button">🖨 Cetak Data</button>
             </div>
           </div>
         ) : (
-          <p style={{ textAlign: 'center', color: '#666', marginTop: '20px' }}>📌 Loading data...</p>
+          <p className="loading">📌 Loading data...</p>
         )}
       </div>
-
-      {/* CSS untuk menyembunyikan elemen saat dicetak */}
-      <style>
-        {`
-          @media print {
-            .no-print {
-              display: none !important;
-            }
-            .print-container {
-              background: white !important;
-              color: black !important;
-              padding: 20px;
-            }
-          }
-        `}
-      </style>
     </div>
   );
 };
