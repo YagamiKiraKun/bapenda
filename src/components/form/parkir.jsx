@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './parkir.css'; // File CSS untuk parkir
 import Navbar from '../Navbar';
+import supabase from '../supabase';
+
 
 const Parkir = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    npwd: '',
+    npwpd: '',
     namaWajibPajak: '',
     alamat: '',
     parkirKhusus: [
@@ -27,6 +29,20 @@ const Parkir = () => {
     mengadakanPencatatan: '',
   });
 
+  // Ambil data dari localStorage
+  useEffect(() => {
+    const npwpd = localStorage.getItem("npwpd") || "";
+    const nama_usaha = localStorage.getItem("nama_usaha") || "";
+    const alamat_usaha = localStorage.getItem("alamat_usaha") || "";
+
+    setFormData((prevData) => ({
+      ...prevData,
+      npwpd: npwpd,
+      namaWajibPajak: nama_usaha,
+      alamat: alamat_usaha,
+    }));
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -44,40 +60,60 @@ const Parkir = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+  
     const isAtLeastOneRowFilled = formData.parkirKhusus.some(
       (row) =>
         row.jumlahKendaraan.trim() !== '' ||
         row.tarif.trim() !== '' ||
         row.omzet.trim() !== ''
     );
-
+  
     if (!isAtLeastOneRowFilled) {
       alert('Harap isi minimal satu baris pada tabel Parkir Khusus.');
       return;
     }
-
-    console.log(formData); // Log data form untuk debugging
-    navigate('/penilaian'); // Navigasi ke halaman "penilaian"
+  
+    try {
+      const { data, error } = await supabase.from('parkir').insert([
+        {
+          npwpd: formData.npwpd,
+          nama_wajib_pajak: formData.namaWajibPajak,
+          alamat: formData.alamat,
+          parkir_khusus: formData.parkirKhusus,
+          menggunakan_kas_register: formData.menggunakanKasRegister,
+          mengadakan_pencatatan: formData.mengadakanPencatatan,
+        }
+      ]);      
+  
+      if (error) throw error;
+  
+      alert('Data berhasil disimpan');
+      navigate('/penilaianparkir'); // Sesuaikan dengan halaman yang dituju
+    } catch (error) {
+      console.error('Error inserting data:', error);
+      alert('Gagal menyimpan data. ' + error.message);
+    }
   };
-
+  
   return (
     <div>
       <Navbar />
       <div className="form-container">
         <h2>SPTPD Parkir</h2>
         <form onSubmit={handleSubmit}>
-          {/* NPWD */}
+          {/* NPWPD */}
           <div className="form-group">
-            <label htmlFor="npwd">NPWD</label>
+            <label htmlFor="npwpd">NPWPD</label>
             <input
               type="text"
-              id="npwd"
-              name="npwd"
-              value={formData.npwd}
+              id="npwpd"
+              name="npwpd"
+              value={formData.npwpd}
               onChange={handleChange}
-              placeholder="Masukkan NPWD"
+              placeholder="Masukkan NPWPD"
+              readOnly
               required
             />
           </div>
@@ -92,6 +128,7 @@ const Parkir = () => {
               value={formData.namaWajibPajak}
               onChange={handleChange}
               placeholder="Masukkan Nama Wajib Pajak"
+              readOnly
               required
             />
           </div>
@@ -106,6 +143,7 @@ const Parkir = () => {
               value={formData.alamat}
               onChange={handleChange}
               placeholder="Masukkan alamat"
+              readOnly
               required
             />
           </div>

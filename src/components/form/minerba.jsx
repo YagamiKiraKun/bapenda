@@ -35,10 +35,21 @@ const Minerba = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+
+    // Memformat angka dengan titik sebagai pemisah ribuan
+    if (name === 'harga_pasar' || name === 'jumlah') {
+      let formattedValue = value.replace(/\D/g, ''); // Menghapus karakter non-digit
+      formattedValue = formattedValue.replace(/\B(?=(\d{3})+(?!\d))/g, '.'); // Menambahkan titik sebagai pemisah ribuan
+      setFormData({
+        ...formData,
+        [name]: formattedValue,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -54,7 +65,6 @@ const Minerba = () => {
       alert('Gagal menyimpan data. ' + error.message);
     }
   };
- 
 
   return (
     <div>
