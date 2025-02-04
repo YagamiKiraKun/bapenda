@@ -60,7 +60,7 @@ const Penilaian = () => {
         throw error;
       }
       alert('Data berhasil disimpan!');
-      navigate('/');
+      navigate('/cetak');
     } catch (error) {
       alert(`Gagal menyimpan data: ${error.message}`);
     }

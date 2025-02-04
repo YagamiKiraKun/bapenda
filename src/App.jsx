@@ -15,6 +15,7 @@ import Hotel from './components/form/hotel';
 import Parkir from './components/form/parkir';
 import Hiburan from './components/form/hiburan';
 import Reklame from './components/form/reklame';
+import Cetak from './components/pages/Cetak';
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
         <Route path="/data/ABT" element={<ABT />} />
         <Route path="/penilaian" element={<Penilaian />} />
         <Route path="/register" element={<RegistrationForm />} />
+        <Route path="/cetak" element={<Cetak />} />
       </Routes>
     </Router>
   );  

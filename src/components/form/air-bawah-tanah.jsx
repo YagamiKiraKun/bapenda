@@ -16,27 +16,46 @@ const AirBawahTanah = () => {
     tanggal: '',
   });
 
+  console.log(formData);
+
   // Fetch data wajib_pajak dari Supabase
+  // useEffect(() => {
+  //   const fetchWajibPajak = async () => {
+  //     const { data, error } = await supabase
+  //       .from('wajib_pajak')
+  //       .select('npwpd, nama_usaha, alamat_usaha')
+  //       .limit(1); // Sesuaikan query sesuai kebutuhan
+
+  //     if (error) {
+  //       console.error('Error fetching data:', error);
+  //     } else if (data && data.length > 0) {
+  //       setFormData({
+  //         ...formData,
+  //         npwpd: data[0].npwpd,
+  //         nama: data[0].nama_usaha,
+  //         alamat: data[0].alamat_usaha,
+  //       });
+  //     }
+  //   };
+
+  //   fetchWajibPajak();
+  // }, []);
+
+  const npwpd = localStorage.getItem("npwpd");
+  const nama_usaha = localStorage.getItem("nama_usaha");
+  const alamat_usaha = localStorage.getItem("alamat_usaha");
+
   useEffect(() => {
-    const fetchWajibPajak = async () => {
-      const { data, error } = await supabase
-        .from('wajib_pajak')
-        .select('npwpd, nama_usaha, alamat_usaha')
-        .limit(1); // Sesuaikan query sesuai kebutuhan
+    const npwpd = localStorage.getItem("npwpd") || "";
+    const nama_usaha = localStorage.getItem("nama_usaha") || "";
+    const alamat_usaha = localStorage.getItem("alamat_usaha") || "";
 
-      if (error) {
-        console.error('Error fetching data:', error);
-      } else if (data && data.length > 0) {
-        setFormData({
-          ...formData,
-          npwpd: data[0].npwpd,
-          nama: data[0].nama_usaha,
-          alamat: data[0].alamat_usaha,
-        });
-      }
-    };
-
-    fetchWajibPajak();
+    setFormData((prevData) => ({
+      ...prevData,
+      npwpd,
+      nama: nama_usaha,
+      alamat: alamat_usaha,
+    }));
   }, []);
 
   const handleChange = (e) => {
@@ -73,7 +92,7 @@ const AirBawahTanah = () => {
               type="text"
               id="npwpd"
               name="npwpd"
-              value={formData.npwpd}
+              value={npwpd}
               readOnly
             />
           </div>
@@ -84,7 +103,7 @@ const AirBawahTanah = () => {
               type="text"
               id="nama"
               name="nama"
-              value={formData.nama}
+              value={nama_usaha}
               readOnly
             />
           </div>
@@ -95,7 +114,7 @@ const AirBawahTanah = () => {
               type="text"
               id="alamat"
               name="alamat"
-              value={formData.alamat}
+              value={alamat_usaha}
               readOnly
             />
           </div>
