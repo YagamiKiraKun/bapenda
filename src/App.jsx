@@ -8,6 +8,7 @@ import AirBawahTanah from './components/form/air-bawah-tanah';
 import Penilaian from './components/pages/Penilaian';
 import PenilaianMinerba from './components/pages/PenilaianMinerba';
 import PenilaianParkir from './components/pages/PenilaianParkir';
+import PenilaianPPJ from './components/pages/PenilaianPPJ';
 import RegistrationForm from './components/pages/Register';
 import Minerba from './components/form/minerba';
 import PPJ from './components/form/ppj';
@@ -42,6 +43,7 @@ const App = () => {
         <Route path="/penilaian" element={<Penilaian />} />
         <Route path="/penilaianparkir" element={<PenilaianParkir />} />
         <Route path="/penilaianminerba" element={<PenilaianMinerba />} />
+        <Route path="/penilaianppj" element={<PenilaianPPJ />} />
         <Route path="/register" element={<RegistrationForm />} />
         <Route path="/cetak" element={<Cetak />} />
         <Route path="/cetakminerba" element={<CetakMinerba />} />

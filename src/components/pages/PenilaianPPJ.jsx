@@ -4,7 +4,7 @@ import supabase from '../supabase';
 import './penilaian.css';
 import Navbar from '../Navbar';
 
-const Penilaian = () => {
+const PenilaianPPJ = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     npwpd: '',
@@ -170,4 +170,4 @@ const Penilaian = () => {
   );
 };
 
-export default Penilaian;
+export default PenilaianPPJ;
