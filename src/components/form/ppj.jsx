@@ -1,22 +1,33 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Tambahkan useNavigate
-import './ppj.css'; // Pastikan file CSS juga menggunakan nama yang sesuai
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import supabase from '../supabase'; 
+import './ppj.css'; 
 import Navbar from '../Navbar';
 
 const PPJ = () => {
-  const navigate = useNavigate(); // Inisialisasi navigasi
+  const navigate = useNavigate(); 
   const [formData, setFormData] = useState({
     npwpd: '',
-    asalTenagaListrik: '',
-    golonganTarif: '',
+    asal_tenaga_listrik: '',
+    golongan_tarif: '',
     voltase: '',
-    dayaListrik: '',
-    tarifPerKwh: '',
-    penggunaanListrik: Array.from({ length: 12 }, () => ({
+    daya_listrik: '',
+    tarif_per_kwh: '',
+    penggunaan_listrik: Array.from({ length: 12 }, () => ({
       bulan: '',
       jumlahKwh: '',
     })),
   });
+
+  useEffect(() => {
+    const npwpd = localStorage.getItem("npwpd");
+    if (npwpd) {
+      setFormData((prevData) => ({
+        ...prevData,
+        npwpd,
+      }));
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,18 +38,26 @@ const PPJ = () => {
   };
 
   const handleTableChange = (index, key, value) => {
-    const updatedPenggunaanListrik = [...formData.penggunaanListrik];
+    const updatedPenggunaanListrik = [...formData.penggunaan_listrik];
     updatedPenggunaanListrik[index][key] = value;
     setFormData({
       ...formData,
-      penggunaanListrik: updatedPenggunaanListrik,
+      penggunaan_listrik: updatedPenggunaanListrik,
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData); // Log data formulir
-    navigate('/penilaian'); // Navigasikan ke halaman "penilaian"
+    try {
+      const { error } = await supabase.from('penerangan_jalan').insert([formData]);
+      if (error) throw error;
+
+      alert('Data berhasil disimpan');
+      navigate('/penilaianppj');
+    } catch (error) {
+      console.error('Error inserting data:', error);
+      alert('Gagal menyimpan data. ' + error.message);
+    }
   };
 
   return (
@@ -54,18 +73,16 @@ const PPJ = () => {
               id="npwpd"
               name="npwpd"
               value={formData.npwpd}
-              onChange={handleChange}
-              placeholder="Masukkan NPWPD"
-              required
+              readOnly
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="asalTenagaListrik">Asal Tenaga Listrik</label>
+            <label htmlFor="asal_tenaga_listrik">Asal Tenaga Listrik</label>
             <select
-              id="asalTenagaListrik"
-              name="asalTenagaListrik"
-              value={formData.asalTenagaListrik}
+              id="asal_tenaga_listrik"
+              name="asal_tenaga_listrik"
+              value={formData.asal_tenaga_listrik}
               onChange={handleChange}
               required
             >
@@ -76,11 +93,11 @@ const PPJ = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="golonganTarif">Golongan Tarif</label>
+            <label htmlFor="golongan_tarif">Golongan Tarif</label>
             <select
-              id="golonganTarif"
-              name="golonganTarif"
-              value={formData.golonganTarif}
+              id="golongan_tarif"
+              name="golongan_tarif"
+              value={formData.golongan_tarif}
               onChange={handleChange}
               required
             >
@@ -108,11 +125,11 @@ const PPJ = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="dayaListrik">Daya Listrik</label>
+            <label htmlFor="daya_listrik">Daya Listrik</label>
             <select
-              id="dayaListrik"
-              name="dayaListrik"
-              value={formData.dayaListrik}
+              id="daya_listrik"
+              name="daya_listrik"
+              value={formData.daya_listrik}
               onChange={handleChange}
               required
             >
@@ -127,12 +144,12 @@ const PPJ = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="tarifPerKwh">Tarif Listrik per kWh (Rp)</label>
+            <label htmlFor="tarif_per_kwh">Tarif Listrik per kWh (Rp)</label>
             <input
               type="number"
-              id="tarifPerKwh"
-              name="tarifPerKwh"
-              value={formData.tarifPerKwh}
+              id="tarif_per_kwh"
+              name="tarif_per_kwh"
+              value={formData.tarif_per_kwh}
               onChange={handleChange}
               placeholder="Masukkan tarif listrik per kWh"
               required
@@ -169,7 +186,7 @@ const PPJ = () => {
                       <input
                         type="number"
                         name={`jumlahKwh-${index}`}
-                        value={formData.penggunaanListrik[index].jumlahKwh}
+                        value={formData.penggunaan_listrik[index].jumlahKwh}
                         onChange={(e) =>
                           handleTableChange(index, 'jumlahKwh', e.target.value)
                         }
@@ -182,7 +199,6 @@ const PPJ = () => {
               </tbody>
             </table>
           </div>
-
           <button type="submit">Next</button>
         </form>
       </div>
