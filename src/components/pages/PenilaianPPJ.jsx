@@ -60,7 +60,7 @@ const PenilaianPPJ = () => {
         throw error;
       }
       alert('Data berhasil disimpan!');
-      navigate('/cetak');
+      navigate('/cetakppj');
     } catch (error) {
       alert(`Gagal menyimpan data: ${error.message}`);
     }

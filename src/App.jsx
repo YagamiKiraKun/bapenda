@@ -21,6 +21,7 @@ import Reklame from './components/form/reklame';
 import Cetak from './components/pages/Cetak';
 import CetakMinerba from './components/pages/CetakMinerba';
 import CetakParkir from './components/pages/CetakParkir';
+import CetakPPJ from './components/pages/CetakPPJ';
 
 const App = () => {
   return (
@@ -48,6 +49,7 @@ const App = () => {
         <Route path="/cetak" element={<Cetak />} />
         <Route path="/cetakminerba" element={<CetakMinerba />} />
         <Route path="/cetakparkir" element={<CetakParkir />} />
+        <Route path="/cetakppj" element={<CetakPPJ />} />
       </Routes>
     </Router>
   );  

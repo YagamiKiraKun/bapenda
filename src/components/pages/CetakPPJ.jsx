@@ -5,7 +5,7 @@ import supabase from '../supabase';
 import './Cetak.css'; // Import file CSS terpisah
 import logoDispenda from '../assets/logodispenda.png'; // Pastikan path benar
 
-const Cetak = () => {
+const CetakPPJ = () => {
   const navigate = useNavigate();
   const [dataPenilaian, setDataPenilaian] = useState(null);
   const [dataAirBawahTanah, setDataAirBawahTanah] = useState(null);
@@ -19,21 +19,21 @@ const Cetak = () => {
       }
 
       try {
-        const { data: penilaian } = await supabase
-          .from('penilaian')
+        const { data: penilaianppj } = await supabase
+          .from('penilaianppj')
           .select('*')
           .eq('npwpd', npwpd)
           .single();
 
-        setDataPenilaian(penilaian);
+        setDataPenilaian(penilaianppj);
 
-        const { data: airBawahTanah } = await supabase
-          .from('air_bawah_tanah')
+        const { data: PPJ } = await supabase
+          .from('penerangan_jalan')
           .select('*')
           .eq('npwpd', npwpd)
           .single();
 
-        setDataAirBawahTanah(airBawahTanah);
+        setDataAirBawahTanah(PPJ);
       } catch (error) {
         console.error('Gagal mengambil data:', error.message);
       }
@@ -56,12 +56,12 @@ const Cetak = () => {
         </div>
 
         <h1 className="title">Lembar Data Wajib Pajak</h1>
-        {dataPenilaian && dataAirBawahTanah ? (
+        {dataPenilaianPPJ && dataPPJ ? (
           <div className="data-section">
             <h2 className="section-title">📌 Data Penilaian</h2>
             <table className="data-table">
               <tbody>
-                {Object.entries(dataPenilaian).map(([key, value]) => (
+                {Object.entries(dataPenilaianPPJ).map(([key, value]) => (
                   <tr key={key}>
                     <td className="data-label">{key.replace('_', ' ')}</td>
                     <td className="data-value">{value}</td>
@@ -70,10 +70,10 @@ const Cetak = () => {
               </tbody>
             </table>
 
-            <h2 className="section-title">💧 Data Air Bawah Tanah</h2>
+            <h2 className="section-title">Data Penerangan Jalan</h2>
             <table className="data-table">
               <tbody>
-                {Object.entries(dataAirBawahTanah).map(([key, value]) => (
+                {Object.entries(dataPPJ).map(([key, value]) => (
                   <tr key={key}>
                     <td className="data-label">{key.replace('_', ' ')}</td>
                     <td className="data-value">{value}</td>
@@ -83,7 +83,7 @@ const Cetak = () => {
             </table>
 
             <div className="no-print button-container">
-              <button onClick={() => window.print()} className="print-button">🖨 Print</button>
+              <button onClick={() => window.print()} className="print-button">🖨 Cetak Data</button>
             </div>
           </div>
         ) : (
@@ -94,4 +94,4 @@ const Cetak = () => {
   );
 };
 
-export default Cetak;
+export default CetakPPJ;
