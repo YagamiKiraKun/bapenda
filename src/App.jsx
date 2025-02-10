@@ -4,6 +4,7 @@ import Home from './components/pages/Home';
 import Login from './components/pages/Login';
 import Welcome from './components/pages/Welcome';
 import ABT from './components/data/ABT';
+import MinerbaAdmin from './components/data/MinerbaAdmin';
 import AirBawahTanah from './components/form/air-bawah-tanah';
 import Penilaian from './components/pages/Penilaian';
 import PenilaianMinerba from './components/pages/PenilaianMinerba';
@@ -41,6 +42,7 @@ const App = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/data/ABT" element={<ABT />} />
+        <Route path="/data/minerba" element={<MinerbaAdmin />} />
         <Route path="/penilaian" element={<Penilaian />} />
         <Route path="/penilaianparkir" element={<PenilaianParkir />} />
         <Route path="/penilaianminerba" element={<PenilaianMinerba />} />
