@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import './Register.css';
@@ -15,7 +16,6 @@ const RegistrationForm = () => {
     password: '',
     confirmPassword: '',
     namaUsaha: '',
-    jenisUsaha: '',
     alamatUsaha: '',
     nomorTeleponUsaha: '',
     namaPemilik: '',
@@ -48,7 +48,6 @@ const RegistrationForm = () => {
           password: formData.password,
           npwpd: npwpd,
           nama_usaha: formData.namaUsaha,
-          jenis_usaha: formData.jenisUsaha,
           alamat_usaha: formData.alamatUsaha,
           nomor_telepon_usaha: formData.nomorTeleponUsaha,
           nama_pemilik: formData.namaPemilik,
@@ -68,7 +67,6 @@ const RegistrationForm = () => {
           password: '',
           confirmPassword: '',
           namaUsaha: '',
-          jenisUsaha: '',
           alamatUsaha: '',
           nomorTeleponUsaha: '',
           namaPemilik: '',
@@ -137,29 +135,6 @@ const RegistrationForm = () => {
             required
             className="input"
           />
-        </div>
-
-        <div className="formGroup">
-          <label htmlFor="jenisUsaha">Jenis Usaha</label>
-          <select
-            id="jenisUsaha"
-            name="jenisUsaha"
-            value={formData.jenisUsaha}
-            onChange={handleChange}
-            required
-            className="input"
-          >
-            <option value="">Pilih Jenis Usaha</option>
-            <option value="Air Bawah Tanah">Air Bawah Tanah</option>
-            <option value="Minerba">Minerba</option>
-            <option value="Penerangan Jalan">Penerangan Jalan</option>
-            <option value="Restoran">Restoran</option>
-            <option value="Walet">Walet</option>
-            <option value="Hotel">Hotel</option>
-            <option value="Parkir">Parkir</option>
-            <option value="Hiburan">Hiburan</option>
-            <option value="Reklame">Reklame</option>
-          </select>
         </div>
 
         <div className="formGroup">

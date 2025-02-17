@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import supabase from '../supabase';
@@ -17,29 +18,6 @@ const AirBawahTanah = () => {
   });
 
   console.log(formData);
-
-  // Fetch data wajib_pajak dari Supabase
-  // useEffect(() => {
-  //   const fetchWajibPajak = async () => {
-  //     const { data, error } = await supabase
-  //       .from('wajib_pajak')
-  //       .select('npwpd, nama_usaha, alamat_usaha')
-  //       .limit(1); // Sesuaikan query sesuai kebutuhan
-
-  //     if (error) {
-  //       console.error('Error fetching data:', error);
-  //     } else if (data && data.length > 0) {
-  //       setFormData({
-  //         ...formData,
-  //         npwpd: data[0].npwpd,
-  //         nama: data[0].nama_usaha,
-  //         alamat: data[0].alamat_usaha,
-  //       });
-  //     }
-  //   };
-
-  //   fetchWajibPajak();
-  // }, []);
 
   const npwpd = localStorage.getItem("npwpd");
   const nama_usaha = localStorage.getItem("nama_usaha");

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import './Login.css';
@@ -56,8 +57,6 @@ const Login = () => {
     }
   };
   
-  
-  
 
   const handleRegister = () => {
     navigate('/register');
@@ -69,7 +68,7 @@ const Login = () => {
         <div className="login-logo">
           <img src={logoDispenda} alt="Logo" className="logo" />
         </div>
-        <h1 className="login-title">SISTEM E-PDL DISPENDA SUMATERA SELATAN</h1>
+        <h1 className="login-title">SISTEM E-PDL DISPENDA KOTA PALEMBANG</h1>
         <form className="login-form" onSubmit={handleLogin}>
           <div className="input-group">
             <span className="icon">👤</span>

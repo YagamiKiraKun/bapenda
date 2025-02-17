@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import './Home.css';
 import Navbar from '../Navbar';
-import { useNavigate } from 'react-router-dom'; // Menggunakan React Router untuk navigasi
+import { useNavigate } from 'react-router-dom';
 import iconABT from '../assets/icon/air-bawah-tanah.png';
 import iconMinerba from '../assets/icon/minerba.png';
 import iconPPJ from '../assets/icon/ppj.png';
@@ -22,7 +23,7 @@ const Home = () => {
   return (
     <div className="home-container">
       <Navbar />
-      <h1 className="home-title">SELAMAT DATANG DI SISTEM E-PDL DISPENDA SUMATERA SELATAN</h1>
+      <h1 className="home-title">SELAMAT DATANG DI SISTEM E-PDL DISPENDA KOTA PALEMBANG</h1>
       <div className="home-message">
         <p>Anda login sebagai Wajib Pajak, Silahkan pilih Kategori Pajak</p>
       </div>
