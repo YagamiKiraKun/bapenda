@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 
 // Inisialisasi Supabase
-const supabaseUrl = 'https://eqcxtqctngivgazzhudt.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVxY3h0cWN0bmdpdmdhenpodWR0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzc1Mjg2NTIsImV4cCI6MjA1MzEwNDY1Mn0.ap_uwHCdsSfWp_68XLYyTkmFz2ZjDV9BImSv8E5K3Q4';
+const supabaseUrl = 'https://wcshxbnfpcmkiezfeaix.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indjc2h4Ym5mcGNta2llemZlYWl4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY2OTkyMjYsImV4cCI6MjA3MjI3NTIyNn0.9vZ4CKA5gdGFpy-iTufR2kg6y9CkIpNZBehMYYJzy70';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const RegistrationForm = () => {
